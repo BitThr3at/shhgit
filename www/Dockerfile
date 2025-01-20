@@ -20,9 +20,9 @@ FROM debian:buster-slim AS runner
 COPY --from=builder /tmp/nginx.deb /tmp
 
 RUN apt-get update -y \
-        && apt-get install --no-install-recommends -y libssl1.1 lsb-base \
-        && dpkg -i /tmp/nginx.deb \
-        && apt-mark hold nginx
+    && apt-get install --no-install-recommends -y libssl1.1 lsb-base libpcre2-8-0 \
+    && dpkg -i /tmp/nginx.deb \
+    && apt-mark hold nginx
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
